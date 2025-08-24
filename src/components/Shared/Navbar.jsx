@@ -220,8 +220,13 @@ const Navbar = () => {
           <IoBagHandleOutline className="w-5 h-5" />
           <CiSearch className="w-6 h-6" />
           <Link href="/appointment">
-            <button className="btn btn-outline text-[#FF3811] hover:bg-[#FF3811] hover:text-white">
+            <button className="btn btn-outline text-[#FF3811] hover:bg-[#FF3811] hover:text-[#92230d]">
               Appointment
+            </button>
+          </Link>
+          <Link href="/login">
+            <button className="btn btn-outline text-white bg-[#FF3811] hover:text-[#92230d]">
+              LogIn
             </button>
           </Link>
         </div>
