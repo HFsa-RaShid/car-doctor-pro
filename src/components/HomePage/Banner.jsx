@@ -20,15 +20,15 @@ export default function Slider() {
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000 }}
         loop={true}
-        className="h-[520px]" 
+        className="h-[570px]"
       >
         {slides.map((num) => (
-          <SwiperSlide key={num} className="relative h-[520px]">
+          <SwiperSlide key={num} className="relative h-[570px]">
             <Image
               src={`/assets/images/homeCarousel/${num}.jpg`}
               alt={`Slide ${num}`}
               fill
-              className="bg-contain rounded-lg"
+              className="rounded-lg object-cover object-top"
               priority
             />
           </SwiperSlide>
