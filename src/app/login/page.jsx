@@ -3,16 +3,30 @@
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { FaFacebookF, FaLinkedinIn, FaGoogle } from "react-icons/fa";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data) => {
+    // console.log("Form Data:", data);
+    const result = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    reset();
+    if (result.status === 200) {
+      router.push("/");
+    }
+    console.log(result);
   };
 
   return (
@@ -21,7 +35,7 @@ export default function LoginPage() {
         {/* Left Illustration */}
         <div className="flex items-center justify-center p-8 bg-white">
           <Image
-            src="/assets/images/login/login.svg" 
+            src="/assets/images/login/login.svg"
             alt="Sign Up Illustration"
             width={320}
             height={320}
@@ -34,13 +48,11 @@ export default function LoginPage() {
           <h2 className="text-2xl font-semibold text-center py-2">LogIn</h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            
-
             {/* Email */}
             <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
               <input
                 type="email"
                 placeholder="Your email"
@@ -56,15 +68,17 @@ export default function LoginPage() {
                 }`}
               />
               {errors.email && (
-                <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
             {/* Password */}
             <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">
-            Password
-          </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
               <input
                 type="password"
                 placeholder="Your password"
@@ -85,8 +99,6 @@ export default function LoginPage() {
                 </p>
               )}
             </div>
-
-           
 
             {/* Submit */}
             <button
