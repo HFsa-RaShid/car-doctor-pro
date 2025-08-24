@@ -2,17 +2,38 @@
 
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaFacebookF, FaLinkedinIn, FaGoogle } from "react-icons/fa";
 
 export default function SignupPage() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
+    const result = fetch("http://localhost:3000/signup/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.userId) {
+          toast.success("Successfully Signed Up");
+        } else {
+          toast.error(data.message || "Something went wrong");
+        }
+        reset();
+      })
+
+      .catch((err) => console.log(err));
+    console.log(result);
   };
 
   return (
@@ -21,7 +42,7 @@ export default function SignupPage() {
         {/* Left Illustration */}
         <div className="flex items-center justify-center p-8 bg-white">
           <Image
-            src="/assets/images/login/login.svg" 
+            src="/assets/images/login/login.svg"
             alt="Sign Up Illustration"
             width={320}
             height={320}
@@ -36,9 +57,9 @@ export default function SignupPage() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Name */}
             <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">
-            Name
-          </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name
+              </label>
               <input
                 type="text"
                 placeholder="Your name"
@@ -48,15 +69,17 @@ export default function SignupPage() {
                 }`}
               />
               {errors.name && (
-                <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.name.message}
+                </p>
               )}
             </div>
 
             {/* Email */}
             <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
-          </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
               <input
                 type="email"
                 placeholder="Your email"
@@ -72,15 +95,17 @@ export default function SignupPage() {
                 }`}
               />
               {errors.email && (
-                <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
             {/* Password */}
             <div>
-                 <label className="block text-sm font-medium text-gray-700 mb-1">
-            Password
-          </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
               <input
                 type="password"
                 placeholder="Your password"
@@ -101,8 +126,6 @@ export default function SignupPage() {
                 </p>
               )}
             </div>
-
-           
 
             {/* Submit */}
             <button
