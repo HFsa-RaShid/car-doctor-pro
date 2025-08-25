@@ -1,9 +1,10 @@
 "use client";
 
+import SocialSignIn from "@/components/Shared/SocialSignIn";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FaFacebookF, FaLinkedinIn, FaGoogle } from "react-icons/fa";
+
 
 export default function SignupPage() {
   const {
@@ -139,17 +140,7 @@ export default function SignupPage() {
           {/* Social Sign Up */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">Or Sign Up with</p>
-            <div className="flex justify-center gap-4 mt-3">
-              <button className="p-2 border rounded-full hover:bg-gray-100">
-                <FaFacebookF className="text-blue-600" />
-              </button>
-              <button className="p-2 border rounded-full hover:bg-gray-100">
-                <FaLinkedinIn className="text-blue-700" />
-              </button>
-              <button className="p-2 border rounded-full hover:bg-gray-100">
-                <FaGoogle className="text-red-500" />
-              </button>
-            </div>
+            <SocialSignIn></SocialSignIn>
           </div>
 
           {/* Login Link */}
