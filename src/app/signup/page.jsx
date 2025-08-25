@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-
 export default function SignupPage() {
   const {
     register,
@@ -46,8 +45,8 @@ export default function SignupPage() {
             src="/assets/images/login/login.svg"
             alt="Sign Up Illustration"
             width={320}
-            height={320}
-            className="object-contain"
+            height={0}
+            className="h-[320px] w-auto object-contain"
           />
         </div>
 

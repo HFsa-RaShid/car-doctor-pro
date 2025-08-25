@@ -27,7 +27,7 @@ export default function LoginPage() {
     reset();
     if (result.status === 200) {
       router.push("/");
-      toast.success('Successfully Logged In');
+      toast.success("Successfully Logged In");
     }
     // console.log(result);
   };
@@ -41,8 +41,8 @@ export default function LoginPage() {
             src="/assets/images/login/login.svg"
             alt="Sign Up Illustration"
             width={320}
-            height={320}
-            className="object-contain"
+            height={0} 
+            className="h-[320px] w-auto object-contain"
           />
         </div>
 
