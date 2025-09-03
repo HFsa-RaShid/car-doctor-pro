@@ -9,7 +9,7 @@ import { IoBagHandleOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const session = useSession();
-  console.log(session);
+  // console.log(session);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

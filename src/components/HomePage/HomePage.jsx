@@ -4,7 +4,7 @@ import Services from './Services';
 
 const HomePage = () => {
     return (
-        <div className='h-screen'>
+        <div className='min-h-screen'>
             <Banner></Banner>
             <Services></Services>
         </div>
